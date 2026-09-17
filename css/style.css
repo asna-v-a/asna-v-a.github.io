@@ -1239,10 +1239,10 @@ button, input, textarea {
 .site-footer {
   border-top: 1px solid var(--border-subtle);
   background: #070a12;
-  padding: 48px 0;
+  padding: 48px 0 36px 0;
 }
 
-.footer-inner {
+.footer-top {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1253,39 +1253,66 @@ button, input, textarea {
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .footer-name {
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .footer-role {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-family: var(--font-mono);
   color: var(--accent-cyan);
 }
 
-.footer-links {
+.footer-btn-group {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.footer-link {
+.footer-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
 }
 
-.footer-link:hover {
-  color: var(--text-primary);
+.footer-pill-btn:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 32px 0 24px 0;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .footer-copy {
   font-size: 0.8125rem;
+  font-family: var(--font-mono);
   color: var(--text-muted);
 }
 
@@ -1368,5 +1395,20 @@ button, input, textarea {
 
   .pipeline-flow {
     grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer-btn-group {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .footer-copy {
+    line-height: 1.6;
   }
 }
