@@ -389,6 +389,17 @@ button, input, textarea {
   z-index: 0;
 }
 
+.hero-3d-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.42;
+}
+
 .hero-container {
   position: relative;
   z-index: 1;
@@ -1314,6 +1325,95 @@ button, input, textarea {
   font-size: 0.8125rem;
   font-family: var(--font-mono);
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Subtle 3D Perspective & Tilt Effects
+   ========================================================================== */
+.has-3d-tilt {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(var(--tz, 0px));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  will-change: transform;
+}
+
+.has-3d-tilt.is-tilting {
+  transition: transform 0.08s linear, border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Subtle dynamic spotlight sheen on cards */
+.has-3d-tilt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(450px circle at var(--mx, -1000px) var(--my, -1000px), rgba(6, 182, 212, 0.07), transparent 70%);
+  opacity: var(--spotlight-opacity, 0);
+  transition: opacity 0.3s ease;
+  z-index: 4;
+}
+
+.project-card.featured-ai.has-3d-tilt::before {
+  background: radial-gradient(450px circle at var(--mx, -1000px) var(--my, -1000px), rgba(139, 92, 246, 0.08), transparent 70%);
+}
+
+/* Inner elements subtle 3D depth */
+.has-3d-tilt .project-title,
+.has-3d-tilt .project-meta-badges,
+.has-3d-tilt .project-actions,
+.has-3d-tilt .visual-preview-frame {
+  transform: translateZ(0px);
+  transition: transform 0.25s ease-out;
+}
+
+.has-3d-tilt.is-tilting .project-title,
+.has-3d-tilt.is-tilting .project-actions {
+  transform: translateZ(8px);
+}
+
+/* About Photo 3D Lift & Tilt */
+.about-photo-wrapper.has-photo-3d {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--photo-rx, 0deg)) rotateY(var(--photo-ry, 0deg));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  will-change: transform;
+}
+
+.about-photo-wrapper.has-photo-3d::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(280px circle at var(--photo-mx, -1000px) var(--photo-my, -1000px), rgba(255, 255, 255, 0.12), transparent 70%);
+  opacity: var(--photo-sheen-opacity, 0);
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.about-photo-wrapper.has-photo-3d:hover {
+  border-color: var(--border-focus);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.5), 0 0 24px rgba(59, 130, 246, 0.2);
+}
+
+/* Accessibility: Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .has-3d-tilt,
+  .about-photo-wrapper.has-photo-3d {
+    transform: none !important;
+    transition: none !important;
+  }
+  .has-3d-tilt::before,
+  .about-photo-wrapper.has-photo-3d::before {
+    display: none !important;
+  }
+  .hero-3d-canvas {
+    opacity: 0.25;
+  }
 }
 
 /* ==========================================================================
