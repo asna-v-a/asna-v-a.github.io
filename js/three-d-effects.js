@@ -5,6 +5,7 @@
  * - 3D elevation and tilt on About profile photo.
  * - Performance optimized: 60fps requestAnimationFrame, IntersectionObserver pause when offscreen,
  *   prefers-reduced-motion support, touch/mobile detection.
+ * Version: 1.0.1
  */
 
 (function () {
